@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { EntityModule } from 'src/entities/entities.module';
 
-import { LoginService as AdminLoginService } from './admin/login/login.service';
+import { LoginService as AppLoginService } from './app/login/login.service';
 
-const serviceList = [AdminLoginService];
+const serviceList = [AppLoginService];
 
 const mouduleList = [EntityModule];
 
