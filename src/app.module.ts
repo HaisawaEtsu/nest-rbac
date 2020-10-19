@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ConfigModule } from './services/config/config.module';
 import { DatabaseService } from './services/config/database/database.service';
 import { TypeOrmService } from './services/config/database/typeorm.service';
-import { GlobalAuthGuard } from './guard/auth.guard';
-import { LoggingInterceptor } from './interceptors/logging.interceptor';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { AuthModule } from './module/auth/auth.module';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-
+import { RoutersModule } from './services/config/router/routes.module';
+import { ValidationPipe } from './pipe/validation.pipe';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -23,28 +21,28 @@ import { JwtModule } from '@nestjs/jwt';
       useClass: TypeOrmService,
     }),
     ConfigModule,
-    AuthModule
+    RoutersModule
   ],
   controllers: [],
   providers: [
+    // 全局使用管道(数据校验)
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe
+    },
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
     },
-    {
-      // 设置全局JWT守卫
-      provide: APP_GUARD,
-      useClass: GlobalAuthGuard,
-    },
+    // {
+    //   // 设置全局JWT守卫
+    //   provide: APP_GUARD,
+    //   useClass: GlobalAuthGuard,
+    // },
     // {
     //  // 设置全局角色守卫
     //   provide: APP_GUARD,
     //   useClass: RolesGuard,
-    // },
-    // // 全局使用管道(数据校验)
-    // {
-    //   provide: APP_PIPE,
-    //   useClass: ValidationPipe
     // },
   ],
 })

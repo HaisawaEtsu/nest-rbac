@@ -34,7 +34,7 @@ export class AppAccountEntity extends PublicEntity {
   nickname: string;
 
   @Column('varchar', {
-    nullable: false,
+    nullable: true,
     length: 32,
     name: 'mobile',
     comment: '用户手机',
@@ -42,7 +42,7 @@ export class AppAccountEntity extends PublicEntity {
   mobile: string;
 
   @Column('varchar', {
-    nullable: false,
+    nullable: true,
     length: 128,
     name: 'email',
     comment: '用户邮箱',
@@ -50,7 +50,7 @@ export class AppAccountEntity extends PublicEntity {
   email: string;
 
   @Column('varchar', {
-    nullable: false,
+    nullable: true,
     length: 128,
     name: 'avatar',
     comment: '用户头像',

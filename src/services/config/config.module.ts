@@ -6,6 +6,7 @@ import { DatabaseService as ConfigDatabaseService } from './database/database.se
 const mouduleList = [ConfigDatabaseService];
 
 @Module({
+  
   providers: [
     // 这是nestjs另外一种Dependency Injection的方式
     {

@@ -4,7 +4,7 @@ import { IsString, IsNotEmpty } from 'class-validator';
 export class LoginAppAuthDto {
   @ApiProperty({ required: true, description: '用户名' })
   @IsString({ message: '用户名必须为字符类型' })
-  @IsNotEmpty({ message: '姓名不能为空' })
+  @IsNotEmpty({ message: '用户名不能为空' })
   readonly username: string;
 
   @ApiProperty({ required: true, description: '密码' })

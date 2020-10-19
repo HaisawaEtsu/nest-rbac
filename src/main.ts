@@ -9,7 +9,7 @@ import { TransformInterceptor } from './interceptors/transform.interceptor';
 import { NestExpressApplication } from '@nestjs/platform-express/interfaces/nest-express-application.interface';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { DatabaseService } from './services/config/database/database.service';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 
 const databaseService = new DatabaseService(
   `.env.${process.env.NODE_ENV || 'development'}`,
@@ -49,9 +49,6 @@ async function bootstrap() {
 
   // web漏洞修复，防止XSS攻击
   app.use(helmet())
-
-  // // 全局使用管道
-  // app.useGlobalPipes(new ValidationPipe());
 
   // 全局范围内使用异常过滤器
   app.useGlobalFilters(new HttpExceptionFilter());

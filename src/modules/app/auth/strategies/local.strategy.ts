@@ -4,15 +4,15 @@ import { Strategy } from 'passport-local';
 
 import { ApiErrorMessage } from 'src/enum/api.error.code.enum';
 import { CustomException } from 'src/filters/custom-exception.filter';
+import { ToolsService } from 'src/modules/common/tools/tools.service';
 
-import { ToolsService } from 'src/tools/tools.service';
-import { AppAuthService } from '../app/auth.service';
+import { AppAuthService } from '../auth.service';
 
 /**
  * 本地 验证
  */
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
+export class AppLocalStrategy extends PassportStrategy(Strategy) {
   /**
    * 这里的构造函数向父类传递了授权时必要的参数，在实例化时，父类会得知授权时，客户端的请求必须使用 Authorization 作为请求头，
    * 而这个请求头的内容前缀也必须为 Bearer，在解码授权令牌时，使用秘钥 secretOrKey: 'secretKey' 来将授权令牌解码为创建令牌时的 payload。
@@ -42,7 +42,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       );
     } else if (
       user &&
-      !this.toolsService.checkPassword(user.password, password)
+      !this.toolsService.checkPassword(password, user.password)
     ) {
       throw new CustomException(
         ApiErrorMessage.USER_PASSWD_IS_ERROR,

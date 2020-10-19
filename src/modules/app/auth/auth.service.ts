@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AppAccountService } from 'src/services/app/account/account.service';
-
+import { AppAccountService } from '../account/account.service';
 
 @Injectable()
 export class AppAuthService {
