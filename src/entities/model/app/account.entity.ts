@@ -7,7 +7,7 @@ export class AppAccountEntity extends PublicEntity {
   constructor() {
     super();
   }
-
+  
   @Column('varchar', {
     nullable: false,
     length: 32,

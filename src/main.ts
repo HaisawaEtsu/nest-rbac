@@ -9,7 +9,7 @@ import { TransformInterceptor } from './interceptors/transform.interceptor';
 import { NestExpressApplication } from '@nestjs/platform-express/interfaces/nest-express-application.interface';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { DatabaseService } from './services/config/database/database.service';
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 
 const databaseService = new DatabaseService(
   `.env.${process.env.NODE_ENV || 'development'}`,

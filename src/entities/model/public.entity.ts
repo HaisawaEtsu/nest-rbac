@@ -1,12 +1,13 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 
 export class PublicEntity extends BaseEntity {
 
-  @PrimaryGeneratedColumn({
-    type: 'int',
+  @PrimaryColumn({
+    type: 'uuid',
     name: 'id',
-    comment: '主键id'
+    comment: '主键id',
+    length: 36
   })
   id: number;
 

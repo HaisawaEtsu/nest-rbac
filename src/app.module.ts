@@ -8,6 +8,8 @@ import { DatabaseService } from './services/config/database/database.service';
 import { TypeOrmService } from './services/config/database/typeorm.service';
 import { RoutersModule } from './services/config/router/routes.module';
 import { ValidationPipe } from './pipe/validation.pipe';
+import { WinstonModule } from 'nest-winston'
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -20,15 +22,18 @@ import { ValidationPipe } from './pipe/validation.pipe';
       // Options就是数据库连接信息等
       useClass: TypeOrmService,
     }),
+    // 系统日志模块
+    WinstonModule.forRoot({
+    }),
     ConfigModule,
-    RoutersModule
+    RoutersModule,
   ],
   controllers: [],
   providers: [
     // 全局使用管道(数据校验)
     {
       provide: APP_PIPE,
-      useClass: ValidationPipe
+      useClass: ValidationPipe,
     },
     {
       provide: APP_INTERCEPTOR,

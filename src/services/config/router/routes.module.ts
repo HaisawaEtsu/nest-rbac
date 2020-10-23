@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { Routes,RouterModule } from 'nest-router'
+import { AdminMenuEntity } from 'src/entities/model/admin/menu.entity';
+import { AdminModule } from 'src/modules/admin/admin.module';
 import { AppAccountModule } from 'src/modules/app/account/account.module';
 import { ApplicationModule } from 'src/modules/app/application.module';
 import { AppAuthModule } from 'src/modules/app/auth/auth.module';
@@ -19,12 +21,17 @@ const routes: Routes = [
       }
     ],
   },
+  {
+    path: '/admin',
+    module: AdminModule,
+  }
 ];
 
 const moduleList = [
   ApplicationModule,
   AppAuthModule,
-  AppAccountModule
+  AppAccountModule,
+  AdminModule
 ]
 
 @Module({

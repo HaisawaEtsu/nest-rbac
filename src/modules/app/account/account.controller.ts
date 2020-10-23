@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CurrentUser, AppLoginAuth } from 'src/decorators/customize.decorator';
+import { CurrentUser } from 'src/decorators/customize.decorator';
 import { ObjectType } from 'src/types';
 import { AppAccountService } from './account.service';
 
